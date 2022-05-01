@@ -140,3 +140,4 @@ cython_debug/
 
 # personal additions
 .idea
+~*.docx
