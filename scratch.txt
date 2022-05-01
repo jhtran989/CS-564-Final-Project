@@ -1,0 +1,20 @@
+r"""
+        NP: {<\(><NN.*>(<CC><NN.*>|<RB><RB><.>)*<CD>(<\:><NN.*>(<CC><NN.*>|<RB><RB><.>)*<CD>)*<\)>}
+        NP: {<NN.*>(<CC><NN.*>|<RB><RB><.>)*<\(><CD><\)>(<\:><NN.*>(<CC><NN.*>|<RB><RB><.>)*<\(><CD><\)>)*}
+        NP: {<\(><NN.*><CC><NN.*><CD><\)>}
+            {<\(><NN.*><RB><RB><.><CD><\)>}
+            {<\(><NN.*><CD><\)>}
+            {<NN.*><CC><NN.*><\(><CD><\)>}
+            {<NN.*><RB><RB><.><\(><CD><\)>}
+            {<NN.*><\(><CD><\)>}
+        """
+
+# create REMAINS table
+    remainsTable = Table(TableEnum.REMAINS)
+    remainsTable.attributes[Remains.REMAINS_ID] = remainsId
+
+    # create BIOLOGICAL_PROFILE table
+    biologicalProfileTable = Table(TableEnum.BIOLOGICAL_PROFILE)
+
+    # create BIOLOGICAL_PROFILE table
+    biologicalProfileTable = Table(TableEnum.BIOLOGICAL_PROFILE)

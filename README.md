@@ -73,3 +73,29 @@ py`) for more details.
   "adjective or numeral, ordinal" and for instance, still-to-be-named. An 
   example of this would be "Tersigni-Terrant".
 
+- There seem to be inconsistencies with how the NLTP handles the phrase "et 
+  al." (the POS tag could range from `RB`, `NN`, `CC`, etc.). So, we decided 
+  to just match the general structure and left the POS tag to be anything...
+
+- The `FA802` case report was a lucky case where ***most*** of the authors' 
+  last names were in clear English, but there a few odd cases: 
+
+1. "İşcan/JJ" where the name was not considered a noun at all (since the POS 
+  tag should start with "NN*")
+2. "Rhine/JJ" - odd since (Angel and Kelley 1990; Rhine 1990) passed, but 
+   not (Rhine 1990) 
+   * inconsistency have something to do with how it was interpreted - the 
+     combined method where the semicolon ";" preceded "Rhine"
+3. "Tersigni-Terrant/JJ" from above, counted as one single word
+
+Those should be all the major cases, but we were surprised that we got most 
+of the methods extracted (might be an entirely different story if there were 
+a lot of non-English names...)
+
+- There were non-methods that were detected as methods, but most of them 
+  were just figure references -- i.e., (Figure 1) since the parantheses 
+  would enclose the entire phrase (other phrases fell through, like "age 16")
+
+- For extraction of ***multiple*** reports, a `JSON` file could be used to 
+  store the next `RemainsId` available to be used so that a `bash` script 
+  could be written to automate the execution of the relevant code

@@ -72,13 +72,16 @@ def parseText(doc):
     # NOTICE: seems like we can only have one split on a ":" per pattern...so
     # we need to repeat the same pattern name
     # crazy long expression...
+
+    # TODO: change "et al." phrase to be <.*><.*><\.>
     methodGrammar = r"""
-        NP: {<\(><NN.*>(<CC><NN.*>|<RB><RB><.>)*<CD>(<\:><NN.*>(<CC><NN.*>|<RB><RB><.>)*<CD>)*<\)>}
+        NP: {<\(><NN.*>(<CC><NN.*>|<.*><.*><\.>)*<CD>(<\:><NN.*>(<CC><NN.*>|<.*><.*><\.>)*<CD>)*<\)>}
+        NP: {<NN.*>(<CC><NN.*>|<.*><.*><\.>)*<\(><CD><\)>(<\:><NN.*>(<CC><NN.*>|<.*><.*><\.>)*<\(><CD><\)>)*}
         NP: {<\(><NN.*><CC><NN.*><CD><\)>}
-            {<\(><NN.*><RB><RB><.><CD><\)>}
+            {<\(><NN.*><.*><.*><\.><CD><\)>}
             {<\(><NN.*><CD><\)>}
             {<NN.*><CC><NN.*><\(><CD><\)>}
-            {<NN.*><RB><RB><.><\(><CD><\)>}
+            {<NN.*><.*><.*><\.><\(><CD><\)>}
             {<NN.*><\(><CD><\)>}
         """
 
@@ -128,7 +131,7 @@ def parseText(doc):
                         if word == '(':
                             frontParenCheck = True
 
-                        if word == '.' or word == ')':
+                        if word == '.' or word == ')' or word == ';':
                             parsedWord += f"{word}"
                         else:
                             parsedWord += f" {word}"
