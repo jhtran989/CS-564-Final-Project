@@ -118,3 +118,7 @@ much time to change the design decision
 
 - Need to rename the references to tables as "tuples", some that should be 
   contained in the same table (i.e., same table name attribute)
+
+- Multiline notes section are able to be parsed (given that we combine 
+  everything into a single string with newlines `\n`), but only a 
+  ***single*** `\n` can delimit different paragraphs of the ***same*** section

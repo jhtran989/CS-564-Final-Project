@@ -91,6 +91,8 @@ SEX = 1,
 AGE = 2,
 BIOAFFNITY = 3,
 STATUE = 4,
+INDIVIDUALIZING_CHARACTERISTICS = 5
+PERIMORTEM_TRAUMA = 6
 """
 class BiologicalProfileEnum(Enum):
     BIOLOGICAL_PROFILE_ID = 0
@@ -98,6 +100,8 @@ class BiologicalProfileEnum(Enum):
     AGE = 2
     BIOAFFNITY = 3
     STATURE = 4
+    INDIVIDUALIZING_CHARACTERISTICS = 5
+    PERIMORTEM_TRAUMA = 6
 
     def __repr__(self):
         return self.name

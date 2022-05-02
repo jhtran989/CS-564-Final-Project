@@ -43,8 +43,8 @@ def parseText(doc, tableTotal):
     print()
 
     # get bioaffinity
-    bioaffinityLine = re.search(r"Bioaffinity/Ancestry: (.*)\n"
-                                r"(.*)", fullText)
+    bioaffinityLine = re.search(r"Bioaffinity/Ancestry: (.*?)\n"
+                                r"(.*?)\n\n", fullText, flags=re.DOTALL)
     bioaffinity = bioaffinityLine.group(1)
     bioaffinityNotes = bioaffinityLine.group(2)
 
@@ -77,7 +77,7 @@ def parseText(doc, tableTotal):
 
     # get stature
     statureLine = re.search(r"Stature: ((.*?)-(.*?)) inches\n"
-                            r"(.*)", fullText)
+                            r"(.*?)\n\n", fullText, flags=re.DOTALL)
     startStature = statureLine.group(2)
     endStature = statureLine.group(3)
     statureNotes = statureLine.group(4)
@@ -96,7 +96,7 @@ def parseText(doc, tableTotal):
 
     # get individualizing characteristics
     individualizingCharLine = re.search(r"Individualizing characteristics:\n"
-                                        r"(.*)", fullText)
+                                        r"(.*?)\n\n", fullText, flags=re.DOTALL)
     individualizingCharNotes = individualizingCharLine.group(1)
 
     # add to table
@@ -116,7 +116,7 @@ def parseBiologicalProfileTable(doc, tableTotal):
     perimortemTraumaLine = tableData[2][1]
 
     # biological profile values
-    biologicalProfileValues = re.search(r"BIOLOGICAL PROFILE:(.*)\n"
+    biologicalProfileValues = re.search(r"BIOLOGICAL PROFILE:\n"
                                             r"SEX:(.*)\n"
                                             r"AGE:(.*)\n"
                                             r"ANCESTRY:(.*)\n"
@@ -134,26 +134,33 @@ def parseBiologicalProfileTable(doc, tableTotal):
     bfTable.attributes[BiologicalProfileEnum.AGE] = age
     bfTable.attributes[BiologicalProfileEnum.BIOAFFNITY] = ancestry
     bfTable.attributes[BiologicalProfileEnum.STATURE] = stature
-    tableTotal.addTable(bfTable)
+    #tableTotal.addTable(bfTable)
 
     # individualizing characteristics values
-    individualCharValues = re.search(r"INDIVIDUALIZING CHARACTERISTICS:"
-                                        r"(.*)\n",
-                                        individualizingCharLine)
+    individualCharValues = re.search(r"INDIVIDUALIZING CHARACTERISTICS:\n"
+                                     r"(.*)",
+                                     individualizingCharLine, flags=re.DOTALL)
 
     individualCharNotes = individualCharValues.group(1).strip()
 
-    # add values to individualizing characteristics table
-    icTable = tableTotal.getTable(TableEnum.INDIVIDUALIZING_CHARACTERISTICS)
-    icTable.attributes[IndividualizingCharEnum.IC_NOTES] = individualCharNotes
-    tableTotal.addTable(icTable)
+    # add values to biological profile table
+    bfTable.attributes[BiologicalProfileEnum.INDIVIDUALIZING_CHARACTERISTICS] \
+        = individualCharNotes
+
+    # icTable = tableTotal.getTable(TableEnum.INDIVIDUALIZING_CHARACTERISTICS)
+    # icTable.attributes[IndividualizingCharEnum.IC_NOTES] = individualCharNotes
+    #tableTotal.addTable(icTable)
 
     # individualizing characteristics values
-    perimortemTraumaValues = re.search(r"PERIMORTEM TRAUMA:"
-                                     r"(.*)\n",
-                                     perimortemTraumaLine)
+    perimortemTraumaValues = re.search(r"PERIMORTEM TRAUMA:\n"
+                                       r"(.*)",
+                                       perimortemTraumaLine, flags=re.DOTALL)
 
     perimortemTraumaNotes = perimortemTraumaValues.group(1).strip()
+
+    # add values to perimortem trauma
+    bfTable.attributes[BiologicalProfileEnum.PERIMORTEM_TRAUMA] \
+        = perimortemTraumaNotes
 
 
 # all parsing of table below are STATIC (tables remain at the same relative
@@ -324,7 +331,7 @@ class TableEncapsular():
         return totalString
 
 if __name__ == "__main__":
-    doc_filename = f"case_reports/DRAFTCaseReport_template.docx"
+    doc_filename = f"case_reports/DRAFTCaseReport_template_test.docx"
     doc = docx.Document(doc_filename)
 
     # initialize the tables
