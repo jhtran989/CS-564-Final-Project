@@ -14,6 +14,15 @@ Any current version of `Python` should work.
 - `docx` (to parse the text in the case report documents in `.docx` format)
 - `nltk` (Natural Language Toolkit for Natual Language Processing)
 
+In addition, the additional stuff after downloading the `nltk` package were 
+required:
+
+```python
+# For parts of speech (POS) tags
+nltk.download("averaged_perceptron_tagger")
+nltk.download('punkt')
+```
+
 ### Notes
 
 - The template is ***highly*** structured, so no natural language processing 
@@ -99,3 +108,13 @@ a lot of non-English names...)
 - For extraction of ***multiple*** reports, a `JSON` file could be used to 
   store the next `RemainsId` available to be used so that a `bash` script 
   could be written to automate the execution of the relevant code
+
+**IMPORTANT**
+
+As a hindsight, the "tables" were programmed more like tuples of a table 
+since the "attributes" variable could only hold one tuple (a `dict` 
+structure) instead of actually holding a list of them...It would require too 
+much time to change the design decision
+
+- Need to rename the references to tables as "tuples", some that should be 
+  contained in the same table (i.e., same table name attribute)

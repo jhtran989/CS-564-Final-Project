@@ -16,11 +16,15 @@ from parse_doc import *
 
 
 # Print DEBUGS
-PRINT_METHOD = False
+PRINT_DOC = False
+PRINT_METHOD = True
 
 
 def parseText(doc):
     fullText = getText(doc)
+    if PRINT_DOC:
+        print(f"{fullText}")
+
     # fullText = "jkfl;jaldf (Thensd 1937) jkljak;f (Tkldsfjl and Rkdjlf 1990) " \
     #            "jaf;dl (Tkjfdsl et al. 1926) fajds"
 

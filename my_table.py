@@ -10,6 +10,10 @@ class Table():
     def tableFactory(cls, tableName):
         table = cls(tableName)
 
+        # print(f"{tableName}")
+        # print(f"{TableEnum.REMAINS}")
+        # print(f"{tableName == TableEnum.REMAINS}")
+
         if tableName == TableEnum.REMAINS:
             for name, member in Remains.__members__.items():
                 table.attributes[member] = None
@@ -57,13 +61,13 @@ class Table():
         return self.tableName.name + ": " + self.attributes.__str__()
 
 class TableEnum(Enum):
-    REMAINS = auto(),
-    BIOLOGICAL_PROFILE = auto(),
-    METHOD = auto(),
-    REFERENCE = auto(),
-    BIOAFFINITY = auto(),
-    AGE = auto(),
-    STATURE = auto(),
+    REMAINS = auto()
+    BIOLOGICAL_PROFILE = auto()
+    METHOD = auto()
+    REFERENCE = auto()
+    BIOAFFINITY = auto()
+    AGE = auto()
+    STATURE = auto()
     INDIVIDUALIZING_CHARACTERISTICS = auto()
 
 class Remains(Enum):
@@ -72,8 +76,15 @@ class Remains(Enum):
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 """
 Hard-code the internal IDs (already taken care of with "auto()")
+Edit: auto() does NOT assign # values...just in the form ([name],)
+
+See each of the individual enums below (e.g., AgeEnum) where they derive 
+their values below
 
 BIOLOGICAL_PROFILE_ID = 0,
 SEX = 1,
@@ -82,65 +93,94 @@ BIOAFFNITY = 3,
 STATUE = 4,
 """
 class BiologicalProfileEnum(Enum):
-    BIOLOGICAL_PROFILE_ID = auto(),
-    SEX = auto(),
-    AGE = auto(),
-    BIOAFFNITY = auto(),
-    STATURE = auto(),
+    BIOLOGICAL_PROFILE_ID = 0
+    SEX = 1
+    AGE = 2
+    BIOAFFNITY = 3
+    STATURE = 4
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 class MethodEnum(Enum):
-    METHOD_ID = auto(),
-    METHOD = auto(),
-    COMPARISON_GROUPS = auto(),
-    ESTIMATE = auto(),
+    PARENT_ID = auto()
+    METHOD_ID = auto()
+    METHOD = auto()
+    COMPARISON_GROUPS = auto()
+    ESTIMATE = auto()
     REFERENCE_ID = auto()
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 class ReferenceEnum(Enum):
-    REFERENCE_ID = auto(),
+    REFERENCE_ID = auto()
     REFERENCE = auto()
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 class AgeEnum(Enum):
-    AGE_ID = BiologicalProfileEnum.AGE,
-    AGE_ESTIMATE = auto()
+    AGE_ID = BiologicalProfileEnum.AGE.value
+    AGE_START_ESTIMATE = auto()
+    AGE_END_ESTIMATE = auto()
 
     def __repr__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 class BioaffinityEnum(Enum):
-    BIOAFFINITY_ID = BiologicalProfileEnum.BIOAFFNITY,
+    BIOAFFINITY_ID = BiologicalProfileEnum.BIOAFFNITY.value
     BIOAFFINITY_ESTIMATE = auto()
+    BIOAFFINITY_NOTES = auto()
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 class BioaffinityAttributesEnum(Enum):
-    AFRICAN = auto(),
-    ASIAN = auto(),
+    AFRICAN = auto()
+    ASIAN = auto()
     EUROPEAN = auto()
 
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 class StatureEnum(Enum):
-    STATURE_ID = BiologicalProfileEnum.STATURE,
-    AGE_ESTIMATE = auto()
+    STATURE_ID = BiologicalProfileEnum.STATURE.value
+    STATURE_START_ESTIMATE = auto()
+    STATURE_END_ESTIMATE = auto()
+    STATURE_NOTES = auto()
 
     def __repr__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 class IndividualizingCharEnum(Enum):
     IC_NOTES = auto()
 
     def __repr__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 
@@ -152,6 +192,8 @@ if __name__ == "__main__":
     print(f"{table}")
 
     print(f"{Remains.__members__.items()}")
+    print(f"{StatureEnum.STATURE_ID.value}")
+    print(f"{BiologicalProfileEnum.AGE.value}")
 
 # class DocMethod:
 #     def __init__(self, methodId):
