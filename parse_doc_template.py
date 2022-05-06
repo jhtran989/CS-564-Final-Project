@@ -27,6 +27,12 @@ def parseText(doc, tableTotal):
     country = firstLine.group(3)
     state = firstLine.group(4)
 
+    # add to table
+    remainsTable = tableTotal.getTable(TableEnum.REMAINS)
+    remainsTable.attributes[Remains.TYPE_OF_REMAIN] = typeRemain
+    remainsTable.attributes[Remains.COUNTRY] = country
+    remainsTable.attributes[Remains.STATE] = state
+
     print(f"First Line:")
     print(f"type of remain: {typeRemain}")
     print(f"country: {country}")
@@ -37,6 +43,11 @@ def parseText(doc, tableTotal):
     sexLine = re.search(r"Biological Profile\n"
                           r"Sex: (.*)", fullText)
     sex = sexLine.group(1)
+
+    # add to table
+    sexTable = tableTotal.getTable(TableEnum.SEX)
+    sexTable.attributes[SexEnum.SEX_ESTMATE] = \
+        sex
 
     print(f"Sex:")
     print(f"sex: {sex}")

@@ -83,19 +83,38 @@ py`) for more details.
   example of this would be "Tersigni-Terrant".
 
 - There seem to be inconsistencies with how the NLTP handles the phrase "et 
-  al." (the POS tag could range from `RB`, `NN`, `CC`, etc.). So, we decided 
+  al." (the POS tag could range from `RB`, `NN`, `CC`, `JJ`, etc.). So, we 
+  decided 
   to just match the general structure and left the POS tag to be anything...
 
 - The `FA802` case report was a lucky case where ***most*** of the authors' 
   last names were in clear English, but there a few odd cases: 
 
-1. "İşcan/JJ" where the name was not considered a noun at all (since the POS 
+1. `İşcan/JJ` where the name was not considered a noun at all (since the POS 
   tag should start with "NN*")
-2. "Rhine/JJ" - odd since (Angel and Kelley 1990; Rhine 1990) passed, but 
+2. `Rhine/JJ` - odd since (Angel and Kelley 1990; Rhine 1990) passed, but 
    not (Rhine 1990) 
    * inconsistency have something to do with how it was interpreted - the 
      combined method where the semicolon ";" preceded "Rhine"
-3. "Tersigni-Terrant/JJ" from above, counted as one single word
+3. `Tersigni-Terrant/JJ` from above, counted as one single word
+
+**Note**: The corresponding POS tags are shown below:
+
+1. `JJ` - adjective or numeral, ordinal
+    third ill-mannered pre-war regrettable oiled calamitous first separable
+    ectoplasmic battery-powered participatory fourth still-to-be-named
+    multilingual multi-disciplinary ...
+2. `RB` - adverb
+    occasionally unabatingly maddeningly adventurously professedly
+    stirringly prominently technologically magisterially predominately
+    swiftly fiscally pitilessly ...
+3. `NNP` - noun, proper, singular
+    Motown Venneboerger Czestochwa Ranzer Conchita Trumplane Christos
+    Oceanside Escobar Kreisler Sawyer Cougar Yvette Ervin ODI Darryl CTCA
+    Shannon A.K.C. Meltex Liverpool ...
+4. `CC` - conjunction, coordinating
+    & 'n and both but either et for less minus neither nor or plus so
+    therefore times v. versus vs. whether yet
 
 Those should be all the major cases, but we were surprised that we got most 
 of the methods extracted (might be an entirely different story if there were 

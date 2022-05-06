@@ -17,7 +17,7 @@ from parse_doc import *
 
 # Print DEBUGS
 PRINT_DOC = False
-PRINT_METHOD = True
+PRINT_METHOD = False
 
 
 def parseText(doc):
@@ -27,6 +27,11 @@ def parseText(doc):
 
     # fullText = "jkfl;jaldf (Thensd 1937) jkljak;f (Tkldsfjl and Rkdjlf 1990) " \
     #            "jaf;dl (Tkjfdsl et al. 1926) fajds"
+
+    #TODO: in order to include the section headers, we have to determine
+    # whether a paragraph is considered a section header (like # of words
+    # less than 8) and then grab the chunk of text in between sections
+    # headers to search for methods...
 
     # first, pattern match with regex to get a list of "candidate" strings of
     # methods
@@ -98,6 +103,7 @@ def parseText(doc):
         if isinstance(a, nltk.tree.Tree):
             if a.label() == "NP":
                 if PRINT_METHOD:
+                    print()
                     print(a)
 
                 words = [lf[0] for lf in a.leaves()]
@@ -106,6 +112,9 @@ def parseText(doc):
                 # word, so the first word doesn't count...
                 parsedWord = [words[0]]
                 wordsIter = words[1:]
+
+                if PRINT_METHOD:
+                    print(f"{words[0]}")
 
                 # front parentheses check (since we don't want a space AFTER,
                 # so it would have to be applied on the NEXT word)
@@ -146,7 +155,7 @@ def parseText(doc):
                 else:
                     print(f"{finalWord}")
 
-                print()
+                #print()
 
                 # for lf in a.leaves():
                 #     print(f"{lf}")

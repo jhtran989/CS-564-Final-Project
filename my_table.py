@@ -32,6 +32,12 @@ class Table():
 
             table.attributes[BioaffinityEnum.BIOAFFINITY_ID] = \
                 BioaffinityEnum.BIOAFFINITY_ID.value
+        elif tableName == TableEnum.SEX:
+            for name, member in SexEnum.__members__.items():
+                table.attributes[member] = None
+
+            table.attributes[SexEnum.SEX_ID] = \
+                SexEnum.SEX_ID.value
         elif tableName == TableEnum.AGE:
             for name, member in AgeEnum.__members__.items():
                 table.attributes[member] = None
@@ -66,12 +72,16 @@ class TableEnum(Enum):
     METHOD = auto()
     REFERENCE = auto()
     BIOAFFINITY = auto()
+    SEX = auto()
     AGE = auto()
     STATURE = auto()
     INDIVIDUALIZING_CHARACTERISTICS = auto()
 
 class Remains(Enum):
     REMAINS_ID = auto()
+    TYPE_OF_REMAIN = auto()
+    COUNTRY = auto()
+    STATE = auto()
 
     def __repr__(self):
         return self.name
@@ -81,7 +91,7 @@ class Remains(Enum):
 
 """
 Hard-code the internal IDs (already taken care of with "auto()")
-Edit: auto() does NOT assign # values...just in the form ([name],)
+Edit: auto() does NOT assign # values...just in the form "[name]"
 
 See each of the individual enums below (e.g., AgeEnum) where they derive 
 their values below
@@ -126,6 +136,16 @@ class MethodEnum(Enum):
 class ReferenceEnum(Enum):
     REFERENCE_ID = auto()
     REFERENCE = auto()
+
+    def __repr__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+class SexEnum(Enum):
+    SEX_ID = BiologicalProfileEnum.SEX.value
+    SEX_ESTMATE = auto()
 
     def __repr__(self):
         return self.name
